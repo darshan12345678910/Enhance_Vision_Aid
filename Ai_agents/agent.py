@@ -1,3 +1,10 @@
+"""
+Research Agent Module
+====================
+Autonomous AI agent for research and article writing using Groq LLM.
+Searches web, extracts content, and generates news-worthy articles.
+"""
+
 from phi.agent import Agent
 from phi.model.groq import Groq
 from phi.tools.duckduckgo import DuckDuckGo
@@ -27,5 +34,4 @@ agent = Agent(
 res = agent.run("Latest AI trends", stream=False)
 s = str(res.content)
 speak(s)
-
 
