@@ -1,3 +1,10 @@
+"""
+Chatbot Module
+==============
+Conversational AI using Groq LLM with memory management.
+Provides both simple chat and stateful conversation processing.
+"""
+
 from groq import Groq
 import os
 from dotenv import load_dotenv
@@ -10,10 +17,8 @@ client = Groq(
     api_key=os.environ.get("GROQ_API_KEY"),
 )
 
-# User message
-
 def chat_respond(message):
-# Create chat completion request
+    """Simple chat response using Groq API."""
     chat_completion = client.chat.completions.create(
         messages=[
             {
@@ -48,6 +53,10 @@ from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder, SystemMes
 from langchain_core.runnables import RunnableLambda
 
 class LanguageModelProcessor:
+    """
+    Stateful language model processor with conversation memory.
+    Maintains chat history and processes queries using Groq Mixtral model.
+    """
     def __init__(self):
         self.llm = ChatGroq(
             temperature=0,
@@ -70,6 +79,7 @@ class LanguageModelProcessor:
         self.conversation = self.prompt | self.llm
 
     def process(self, text):
+        """Process user input and return AI response with memory."""
         self.memory.chat_memory.add_user_message(text)
         start_time = time.time()
 
