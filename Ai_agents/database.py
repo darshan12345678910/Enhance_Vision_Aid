@@ -1,3 +1,10 @@
+"""
+Database Management Module
+===========================
+SQLite task database with CRUD operations.
+Manages task storage, status tracking, and persistence.
+"""
+
 import sqlite3
 from datetime import datetime
 
